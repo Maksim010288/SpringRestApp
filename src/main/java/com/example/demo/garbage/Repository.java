@@ -1,6 +1,6 @@
 package com.example.demo.garbage;
 
-import com.example.demo.entity.Student;
+import com.example.demo.entity.StudentEntity;
 import com.example.demo.StudentService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,15 +20,15 @@ public class Repository {
     private final Session session = factory.openSession();
     StudentService studentServiceImlementation;
 
-    public void save(Student student) {
+    public void save(StudentEntity student) {
         session.save(student);
         closed();
     }
 
 
-    public List<Student> getById(int id) {
-        List<Student> studentList = new ArrayList<>();
-        studentList.add(session.get(Student.class, id));
+    public List<StudentEntity> getById(int id) {
+        List<StudentEntity> studentList = new ArrayList<>();
+        studentList.add(session.get(StudentEntity.class, id));
         closed();
         return studentList.stream()
                 .filter(student -> student.getId() == id)
@@ -36,7 +36,7 @@ public class Repository {
     }
 
     public void update(Integer id) {
-        Student getStudent = session.get(Student.class, id);
+        StudentEntity getStudent = session.get(StudentEntity.class, id);
         getStudent.setCourse(3);
         getStudent.setFirstName("Anton");
         closed();

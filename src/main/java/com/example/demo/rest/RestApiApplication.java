@@ -1,6 +1,6 @@
 package com.example.demo.rest;
 
-import com.example.demo.entity.Student;
+import com.example.demo.entity.StudentEntity;
 import com.example.demo.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,31 +19,31 @@ public class RestApiApplication {
 
     @PostMapping(value = "/saveStudent")
     public void saveStudent(int course, String surName, String name) {
-        Student student = new Student(course, name, surName);
+        StudentEntity student = new StudentEntity(course, name, surName);
         studentService.saveAndFlush(student);
     }
 
     @GetMapping(value = "/byId")
-    public Optional<Student> byId(Integer id) {
+    public Optional<StudentEntity> byId(Integer id) {
         return studentService.findById(id);
     }
 
     @GetMapping(value = "/findAll")
-    public List<Student> findAll() {
+    public List<StudentEntity> findAll() {
         return studentService.findAll().stream()
-                .sorted(Comparator.comparing(Student::getId))
+                .sorted(Comparator.comparing(StudentEntity::getId))
                 .collect(Collectors.toList());
     }
 
     @PutMapping(value = "/update")
     public void update(Integer id, Integer course, String firstName, String lastName) {
-        Student student = new Student(course, firstName, lastName);
+        StudentEntity student = new StudentEntity(course, firstName, lastName);
         student.setId(id);
         studentService.saveAndFlush(student);
     }
 
     @DeleteMapping(value = "/delete")
-    public void delete(Student student) {
+    public void delete(StudentEntity student) {
         studentService.delete(student);
     }
 

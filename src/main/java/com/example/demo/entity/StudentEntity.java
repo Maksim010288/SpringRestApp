@@ -3,7 +3,7 @@ package com.example.demo.entity;
 import javax.persistence.*;
 
 @Entity(name = "Students")
-public class Student {
+public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,9 +15,9 @@ public class Student {
     @Column(name = "last_name")
     private String lastName;
 
-    public Student(){}
+    public StudentEntity(){}
 
-    public Student(int course, String firstName, String lastName) {
+    public StudentEntity(int course, String firstName, String lastName) {
         this.course = course;
         this.firstName = firstName;
         this.lastName = lastName;
